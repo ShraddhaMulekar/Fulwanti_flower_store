@@ -1,8 +1,8 @@
-import { orderRouter } from "../../router/order_router"
+import { OrderModel } from "../../models/Order.js"
 
 export const createOrderController = async(req, res)=>{
     try {
-        const order = await orderRouter.create({
+        const order = await OrderModel.create({
             ...req.body,
             userId : req.user.id
         })
