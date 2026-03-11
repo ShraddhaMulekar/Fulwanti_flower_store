@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 export const signInController = async (req, res) => {
   const { name, email, password, address } = req.body || "";
 
-  if (!email && !password) {
+  if (!email || !password) {
     return res.status(400).json({
       message: "Email & Password both are required!",
       status: false,
