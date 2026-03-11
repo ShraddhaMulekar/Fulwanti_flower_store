@@ -1,8 +1,8 @@
-import { UserModel } from "../models/User.js";
+import { UserModel } from "../../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-export const authController = async (req, res) => {
+export const logInController = async (req, res) => {
   const { email, password } = req.body || "";
 
   if (!email && !password) {
@@ -19,14 +19,16 @@ export const authController = async (req, res) => {
       return res.status(400).json({
         message: "User not found! Please register first!",
         status: false,
+        user,
       });
     }
 
     bcrypt.compare(password, user.password, (err, result) => {
       if (err) {
-        return res.status(400).json({
+        return res.status(500).json({
           message: "Invalid credentials",
           status: false,
+          err,
         });
       }
 
@@ -39,20 +41,20 @@ export const authController = async (req, res) => {
         expiresIn: "7d",
       });
 
-      return res.status(200).json(
-        {
-          message: "Log in successful!",
-          status: true,
-        },
-        token,
-        user,
-      );
+      return res.status(200).json({
+        message: "Log in successful!",
+        status: true,
+        token: token,
+        user: user,
+      });
     });
+
   } catch (error) {
     console.log("error in log in controller", error);
     return res.status(502).json({
       message: "server error",
       status: false,
+      error,
     });
   }
 };
