@@ -8,7 +8,7 @@ import { deleteProductController } from '../controllers/product_controller/delet
 export const productRouter = express.Router()
 
 productRouter.get("/check_all", checkAllController )
-productRouter.get("/check_product", getProductController )
+productRouter.get("/check_product/:id", getProductController )
 productRouter.post("/create", createProductController )
-productRouter.patch("/update", updateProductController )
-productRouter.delete("/delete", deleteProductController )
+productRouter.patch("/update/:id", updateProductController )
+productRouter.delete("/delete/:id", deleteProductController )
