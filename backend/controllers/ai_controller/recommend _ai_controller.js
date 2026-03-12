@@ -1,6 +1,6 @@
 import { recommendFlowers } from "../../services/ai_service.js";
 
-export const recommendAiController = () => {
+export const recommendAiController = (req, res) => {
   try {
     const { occasion, budget, color } = req.body;
 
