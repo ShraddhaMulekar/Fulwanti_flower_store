@@ -18,13 +18,15 @@ const Products = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  const filterProducts = items.allProduct?.filter((product) =>{
-    const matchSearch = product.name.toLowerCase().includes(search.toLowerCase())
-    const matchFilter = filter === "" || product.category?.toLowerCase() === filter.toLowerCase()
+  const filterProducts = items.allProduct?.filter((product) => {
+    const matchSearch = product.name
+      .toLowerCase()
+      .includes(search.toLowerCase());
+    const matchFilter =
+      filter === "" || product.category?.toLowerCase() === filter.toLowerCase();
 
-    return matchSearch && matchFilter
-  }
-  );
+    return matchSearch && matchFilter;
+  });
 
   return (
     <div>
