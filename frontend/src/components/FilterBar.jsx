@@ -7,6 +7,7 @@ const FilterBar = ({setFilter}) => {
         <option value="">All</option>
         <option value="rose">Rose</option>
         <option value="tulip">Tulip</option>
+        <option value="lily">Lily</option>
     </select>
   )
 }

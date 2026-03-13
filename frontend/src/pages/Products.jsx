@@ -10,7 +10,7 @@ const Products = () => {
 
   const { items } = useSelector((state) => state.products);
 
-  console.log("items", items)
+  // console.log("items", items.allProduct)
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
 
@@ -18,8 +18,12 @@ const Products = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  const filterProducts = items.filter((product) =>
-    product.name.toLowerCase().includes(search.toLowerCase()),
+  const filterProducts = items.allProduct?.filter((product) =>{
+    const matchSearch = product.name.toLowerCase().includes(search.toLowerCase())
+    const matchFilter = filter === "" || product.category?.toLowerCase() === filter.toLowerCase()
+
+    return matchSearch && matchFilter
+  }
   );
 
   return (
@@ -31,8 +35,8 @@ const Products = () => {
       <FilterBar setFilter={setFilter} />
 
       <div>
-        {filterProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+        {filterProducts?.map((product) => (
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
     </div>
