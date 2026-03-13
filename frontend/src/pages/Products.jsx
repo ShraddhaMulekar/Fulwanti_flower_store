@@ -10,6 +10,7 @@ const Products = () => {
 
   const { items } = useSelector((state) => state.products);
 
+  // console.log("items", items)
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
 
