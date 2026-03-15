@@ -4,6 +4,7 @@ import loginLogic from "./loginLogic";
 
 const LoginPage = () => {
   const { values, handleChange } = useForm({
+    name : "",
     email: "",
     password: "",
   });
@@ -17,6 +18,7 @@ const LoginPage = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <input type="text" placeholder="Name" onChange={handleChange} />
       <input type="email" placeholder="Email" onChange={handleChange} />
       <input type="password" placeholder="Password" onChange={handleChange} />
       <button>Login</button>
