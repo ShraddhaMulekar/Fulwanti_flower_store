@@ -5,7 +5,7 @@ import { removeToCart } from "../redux/cartSlice";
 const Cart = () => {
   const dispatch = useDispatch();
 
-  const cartItems = useSelector((state) => state.cart.cartItem);
+  const cartItems = useSelector((state) => state.cart.cartItems);
   console.log({ cartItems });
 
   const total = cartItems?.reduce((acc, cur) => acc + cur.price, 0);
@@ -14,11 +14,12 @@ const Cart = () => {
     <div>
       <h2>Your Cart </h2>
 
-      {cartItems === undefined ? (
+      {cartItems.length === 0 ? (
         <p>Your cart is empty!</p>
       ) : (
         cartItems?.map((cart) => (
-          <div>
+          <div key={cart._id}>
+            <img src={cart.image} alt={cart.name} width="100" />
             {cart.name} - ₹{cart.price}
             <button onClick={() => dispatch(removeToCart(cart._id))}>
               Remove
@@ -26,7 +27,7 @@ const Cart = () => {
           </div>
         ))
       )}
-      {cartItems && <h3>Total: ₹{total}</h3>}
+      {cartItems.length > 0 && <h3>Total: ₹{total}</h3>}
     </div>
   );
 };
