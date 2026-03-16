@@ -1,20 +1,34 @@
-import React from 'react'
-import useFetch from "../../hook/useFetch"
-import { useDispatch } from 'react-redux'
-import loginSuccess from "../../redux/authSlice"
+import { useDispatch } from "react-redux";
+import useFetch from "../../hook/useFetch";
+import { loginSuccess } from "../../redux/authSlice";
 
 const loginLogic = () => {
-    const {request}=useFetch()
-    const dispatch = useDispatch()
 
-    const loginUser = async(values)=>{
-        const data = await("/auth/login", "POST", values)
+  const { request } = useFetch();
+  const dispatch = useDispatch();
 
-        if(data.token){
-            dispatch(loginSuccess(data))
-        }
+  const loginUser = async (values) => {
+    try {
+
+      const data = await request("/auth/login", "POST", values);
+
+      if (data?.token) {
+
+        localStorage.setItem("token", data.token);
+
+        dispatch(loginSuccess(data));
+
+        alert("Login Successful");
+      } else {
+        alert(data?.message || "Login failed");
+      }
+
+    } catch (error) {
+      console.log(error);
     }
-  return ({loginUser})
-}
+  };
 
-export default loginLogic
+  return { loginUser };
+};
+
+export default loginLogic;
