@@ -2,7 +2,7 @@ import { UserModel } from "../../models/User.js";
 import bcrypt from "bcryptjs";
 
 export const signInController = async (req, res) => {
-  const { name, email, password, address } = req.body || "";
+  const { name, email, password, address, role } = req.body || "";
 
   if (!email || !password) {
     return res.status(400).json({
@@ -32,7 +32,14 @@ export const signInController = async (req, res) => {
         });
       }
 
-      const newUser = await UserModel({ name, address, email, password: hash });
+      const safeRole = role === "admin" || role === "user" ? role : undefined;
+      const newUser = await UserModel({
+        name,
+        address,
+        email,
+        password: hash,
+        ...(safeRole ? { role: safeRole } : {}),
+      });
       await newUser.save();
 
       return res.json(

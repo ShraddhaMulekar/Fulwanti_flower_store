@@ -1,13 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import bg from "../assets/navbarFooterBg.png";
 
 const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-10 border-t border-orange-400/10 bg-black text-white">
-      <div className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm animate-fade-up">
-        <div>
+    <footer
+      className="relative mt-10 border-t border-orange-400/10 text-white overflow-hidden"
+      style={{
+        backgroundImage: `url(${bg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Lighter overlay so background image is visible */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/55 to-black/75 backdrop-blur-[1px]" />
+      <div className="relative">
+        <div className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm animate-fade-up">
+          <div>
           <div className="flex items-center gap-2">
             <span className="text-xl">🌸</span>
             <h3 className="font-extrabold text-lg text-orange-300">
@@ -112,6 +123,7 @@ const Footer = () => {
           <p>© {year} Fulwanti Flower Store. All rights reserved.</p>
           <p className="text-gray-500">Made with care • Only fresh blooms</p>
         </div>
+      </div>
       </div>
     </footer>
   );

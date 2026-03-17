@@ -71,7 +71,7 @@ const AIChat = () => {
         <section className="rounded-2xl border border-white/10 bg-[#0b0d10] p-4 sm:p-6 flex flex-col">
           <div
             ref={listRef}
-            className="flex-1 min-h-[280px] max-h-[480px] overflow-y-auto pr-1 space-y-3"
+            className="flex-1 min-h-70 max-h-120 overflow-y-auto pr-1 space-y-3"
           >
             {chat.length === 0 ? (
               <div className="rounded-2xl border border-white/10 bg-[#111111] p-4">

@@ -17,3 +17,14 @@ export const protect = (req, res, next)=>{
     }
 
 }
+
+export const isAdmin = (req, res, next) => {
+    try {
+        if (req.user?.role !== "admin") {
+            return res.status(403).json({ message: "Admin access only", status: false });
+        }
+        return next();
+    } catch (error) {
+        return res.status(403).json({ message: "Admin access only", status: false });
+    }
+};

@@ -111,13 +111,16 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[320px,1fr] gap-6">
+    <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-[360px,1fr] gap-6 animate-fade-up">
       {/* Product form */}
-      <aside className="bg-white/80 rounded-2xl shadow-md p-4 sm:p-5">
-        <h1 className="text-xl font-extrabold text-gray-900 mb-1">
-          Admin Panel
+      <aside className="rounded-2xl border border-orange-400/10 bg-[#0b0d10] p-4 sm:p-6 h-fit sticky top-24">
+        <p className="text-[10px] tracking-[0.25em] uppercase text-gray-400">
+          only fresh blooms
+        </p>
+        <h1 className="text-2xl font-extrabold text-gray-100 mb-1">
+          Admin Dashboard
         </h1>
-        <p className="text-xs text-gray-500 mb-4">
+        <p className="text-xs text-gray-400 mb-4">
           Create, update, and delete products. Admin can access all user pages &
           data from backend as needed.
         </p>
@@ -128,7 +131,7 @@ const AdminDashboard = () => {
             value={form.name}
             onChange={handleChange}
             placeholder="Product name"
-            className="w-full border border-pink-100 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-pink-400"
+            className="w-full rounded-xl border border-white/10 bg-[#111111] px-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 outline-none focus:ring-2 focus:ring-orange-400"
           />
           <textarea
             name="description"
@@ -136,7 +139,7 @@ const AdminDashboard = () => {
             onChange={handleChange}
             placeholder="Description"
             rows={2}
-            className="w-full border border-pink-100 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-pink-400"
+            className="w-full rounded-xl border border-white/10 bg-[#111111] px-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 outline-none focus:ring-2 focus:ring-orange-400"
           />
           <div className="flex gap-2">
             <input
@@ -145,7 +148,7 @@ const AdminDashboard = () => {
               value={form.price}
               onChange={handleChange}
               placeholder="Price"
-              className="w-1/2 border border-pink-100 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-pink-400"
+              className="w-1/2 rounded-xl border border-white/10 bg-[#111111] px-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 outline-none focus:ring-2 focus:ring-orange-400"
             />
             <input
               name="stock"
@@ -153,7 +156,7 @@ const AdminDashboard = () => {
               value={form.stock}
               onChange={handleChange}
               placeholder="Stock"
-              className="w-1/2 border border-pink-100 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-pink-400"
+              className="w-1/2 rounded-xl border border-white/10 bg-[#111111] px-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 outline-none focus:ring-2 focus:ring-orange-400"
             />
           </div>
           <input
@@ -161,13 +164,13 @@ const AdminDashboard = () => {
             value={form.image}
             onChange={handleChange}
             placeholder="Image URL"
-            className="w-full border border-pink-100 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-pink-400"
+            className="w-full rounded-xl border border-white/10 bg-[#111111] px-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 outline-none focus:ring-2 focus:ring-orange-400"
           />
           <select
             name="category"
             value={form.category}
             onChange={handleChange}
-            className="w-full border border-pink-100 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-pink-400 bg-white"
+            className="w-full rounded-xl border border-white/10 bg-[#111111] px-3 py-2 text-sm text-gray-100 outline-none focus:ring-2 focus:ring-orange-400"
           >
             <option value="">Select category</option>
             <option value="rose">Rose</option>
@@ -179,7 +182,7 @@ const AdminDashboard = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-2 px-4 py-2 rounded-full bg-purple-500 text-white font-semibold shadow hover:bg-purple-600 hover:shadow-lg transition disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full mt-2 h-11 rounded-xl bg-orange-400 text-black font-semibold hover:bg-orange-300 transition-transform transform hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {loading
               ? "Saving..."
@@ -191,40 +194,48 @@ const AdminDashboard = () => {
       </aside>
 
       {/* Product list */}
-      <section className="bg-white/80 rounded-2xl shadow-md p-4 sm:p-5">
-        <h2 className="text-lg font-extrabold text-gray-900 mb-3">
-          All Products
-        </h2>
+      <section className="rounded-2xl border border-orange-400/10 bg-[#0b0d10] p-4 sm:p-6">
+        <div className="flex items-end justify-between gap-3 mb-4">
+          <div>
+            <p className="text-[10px] tracking-[0.25em] uppercase text-gray-400">
+              manage inventory
+            </p>
+            <h2 className="text-xl font-extrabold text-gray-100">
+              All Products
+            </h2>
+          </div>
+          <p className="text-xs text-gray-400">{products.length} items</p>
+        </div>
         {products.length === 0 ? (
-          <p className="text-xs text-gray-500">No products available.</p>
+          <p className="text-xs text-gray-400">No products available.</p>
         ) : (
-          <div className="space-y-3 text-sm max-h-[480px] overflow-y-auto pr-1">
+          <div className="space-y-3 text-sm max-h-[520px] overflow-y-auto pr-1">
             {products.map((p) => (
               <div
                 key={p._id}
-                className="flex items-center gap-3 border border-pink-50 rounded-xl p-2 bg-white hover:shadow-sm transition"
+                className="group flex items-center gap-3 border border-white/10 rounded-2xl p-3 bg-[#0f1216] hover:border-orange-400/30 transition"
               >
                 <img
                   src={p.image}
                   alt={p.name}
-                  className="w-12 h-12 rounded-lg object-cover"
+                  className="w-12 h-12 rounded-xl object-cover"
                 />
                 <div className="flex-1">
-                  <p className="font-semibold text-gray-800">{p.name}</p>
-                  <p className="text-[11px] text-gray-500">
+                  <p className="font-semibold text-gray-100">{p.name}</p>
+                  <p className="text-[11px] text-gray-400">
                     ₹{p.price} • stock {p.stock} •{" "}
                     <span className="capitalize">{p.category}</span>
                   </p>
                 </div>
                 <button
                   onClick={() => startEdit(p)}
-                  className="text-xs px-3 py-1 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition"
+                  className="text-xs px-3 py-2 rounded-xl bg-[#111111] border border-white/10 text-gray-200 hover:border-orange-400/30 hover:text-orange-300 transition"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(p._id)}
-                  className="text-xs px-3 py-1 rounded-full bg-red-100 text-red-600 hover:bg-red-200 transition"
+                  className="text-xs px-3 py-2 rounded-xl bg-[#111111] border border-white/10 text-gray-200 hover:border-red-400/40 hover:text-red-300 transition"
                 >
                   Delete
                 </button>

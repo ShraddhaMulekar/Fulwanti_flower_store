@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/authSlice";
+import bg from "../assets/navbarFooterBg.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -24,8 +25,17 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-20 bg-black/80 backdrop-blur border-b border-orange-400/10 animate-fade-in">
-      <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-4 gap-4 text-sm">
+    <nav
+      className="fixed top-0 left-0 right-0 z-20 border-b border-orange-400/10 animate-fade-in"
+      style={{
+        backgroundImage: `url(${bg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Lighter overlay so background image is visible */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/55 to-black/70 backdrop-blur-[1px]" />
+      <div className="relative max-w-6xl mx-auto flex items-center justify-between px-4 py-4 gap-4 text-sm">
         {/* Brand */}
         <div
           className="flex items-center gap-2 cursor-pointer"
@@ -122,9 +132,9 @@ const Navbar = () => {
               {user?.role === "admin" && (
                 <Link
                   to="/admin"
-                  className="px-3 py-1 rounded-full bg-indigo-500 text-white hover:bg-indigo-400 transition"
+                  className="px-3 py-1 rounded-full bg-orange-400 text-black hover:bg-orange-300 transition-transform transform hover:-translate-y-0.5"
                 >
-                  Admin
+                  Admin Dashboard
                 </Link>
               )}
 
