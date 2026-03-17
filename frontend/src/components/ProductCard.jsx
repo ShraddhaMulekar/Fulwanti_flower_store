@@ -19,35 +19,37 @@ const ProductCard = ({ product }) => {
   return (
     <div
       onClick={openDetails}
-      className="group bg-white rounded-2xl shadow-sm hover:shadow-xl border border-pink-50 overflow-hidden cursor-pointer transform transition-all hover:-translate-y-1"
+      className="group rounded-2xl border border-white/10 bg-[#0f1216] overflow-hidden cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:border-orange-400/40 hover:shadow-[0_10px_30px_rgba(0,0,0,0.45)] animate-fade-in"
     >
-      <div className="overflow-hidden bg-pink-50">
+      <div className="relative overflow-hidden bg-[#111111]">
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-40 object-cover transform group-hover:scale-105 transition-transform duration-500"
+          className="w-40 h-50 m-auto object-cover object-center transform group-hover:scale-105 transition-transform duration-500"
         />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-90" />
       </div>
 
-      <div className="p-3 space-y-1">
-        <h3 className="font-semibold text-gray-800 truncate">
+      <div className="p-4 space-y-1.5">
+        <h3 className="font-semibold text-gray-100 truncate">
           {product.name}
         </h3>
         {product.category && (
-          <p className="text-[11px] uppercase tracking-wide text-pink-500">
+          <p className="text-[10px] uppercase tracking-[0.25em] text-gray-400">
             {product.category}
           </p>
         )}
-        <p className="text-xs text-gray-500 line-clamp-2">
-          {product.description}
+        <p className="text-xs text-gray-400 leading-relaxed">
+          {(product.description || "").slice(0, 90)}
+          {(product.description || "").length > 90 ? "..." : ""}
         </p>
         <div className="flex items-center justify-between pt-2">
-          <p className="text-lg font-extrabold text-pink-600">
+          <p className="text-lg font-extrabold text-orange-300">
             ₹{product.price}
           </p>
           <button
             onClick={handleAddToCart}
-            className="px-3 py-1.5 rounded-full bg-pink-500 text-white text-xs font-semibold shadow hover:bg-pink-600 hover:shadow-md transition"
+            className="px-3.5 py-1.5 rounded-full bg-orange-400 text-black text-xs font-semibold shadow hover:bg-orange-300 transition-transform transform group-hover:-translate-y-0.5"
           >
             Add to Cart
           </button>

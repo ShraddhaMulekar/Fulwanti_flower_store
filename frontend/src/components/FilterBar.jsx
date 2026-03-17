@@ -4,7 +4,7 @@ const FilterBar = ({ setFilter }) => {
   return (
     <select
       onChange={(e) => setFilter(e.target.value)}
-      className="mt-1 w-full rounded-lg border border-pink-100 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 bg-white"
+      className="mt-1 w-full rounded-xl border border-white/10 bg-[#111111] px-3 py-2 text-xs text-gray-100 outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400"
     >
       <option value="">All</option>
       <option value="rose">Rose</option>
