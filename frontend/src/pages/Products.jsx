@@ -35,14 +35,21 @@ const Products = () => {
   });
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[260px,1fr] gap-6">
+    <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[280px,1fr] gap-6 animate-fade-up">
       {/* Left: Filters */}
-      <aside className="bg-white/80 rounded-2xl shadow-md p-4 h-fit sticky top-24 animate-fade-in">
-        <h2 className="text-lg font-bold text-gray-800 mb-3">Filter Flowers</h2>
+      <aside className="bg-[#0b0d10] rounded-2xl border border-white/10 p-4 h-fit sticky top-24">
+        <div className="mb-3">
+          <p className="text-[10px] tracking-[0.25em] uppercase text-gray-400">
+            Fulwanti store
+          </p>
+          <h2 className="text-lg font-extrabold text-gray-100">
+            Filter Flowers
+          </h2>
+        </div>
 
         <div className="space-y-4">
           <div>
-            <label className="text-xs font-semibold text-gray-500">
+            <label className="text-[11px] font-semibold text-gray-300">
               Search
             </label>
             <input
@@ -50,43 +57,55 @@ const Products = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by name..."
-              className="mt-1 w-full rounded-lg border border-pink-100 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400"
+              className="mt-1 w-full rounded-xl border border-white/10 bg-[#111111] px-3 py-2 text-xs text-gray-100 placeholder:text-gray-500 outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400"
             />
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-gray-500">
+            <label className="text-[11px] font-semibold text-gray-300">
               Category
             </label>
             <FilterBar setFilter={setFilter} />
           </div>
         </div>
+
+        <div className="mt-5 rounded-xl border border-white/10 bg-[#111111] p-3">
+          <p className="text-[11px] text-gray-300 font-semibold mb-1">
+            Quick tips
+          </p>
+          <p className="text-[11px] text-gray-400">
+            Click a card to view details. Use filters to find blooms faster.
+          </p>
+        </div>
       </aside>
 
       {/* Right: Products */}
-      <section className="bg-white/80 rounded-2xl shadow-md p-4 sm:p-6 animate-fade-up">
-        <div className="flex items-center justify-between mb-4">
+      <section className="bg-[#0b0d10] rounded-2xl border border-white/10 p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5">
           <div>
-            <h2 className="text-2xl font-extrabold text-gray-800">
+            <p className="text-[10px] tracking-[0.25em] uppercase text-gray-400">
+              only fresh blooms
+            </p>
+            <h2 className="text-2xl font-extrabold text-gray-100">
               Flowers & Bouquets
             </h2>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-gray-400">
               Pick your favourite blooms. Click a card to view full details.
             </p>
           </div>
           {loading && (
-            <span className="text-xs text-pink-500 animate-pulse">
+            <span className="text-xs text-orange-300 animate-pulse">
               Loading products...
             </span>
           )}
         </div>
 
         {filterProducts?.length === 0 ? (
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-gray-400">
             No products match your search / filter.
           </p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
             {filterProducts?.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}

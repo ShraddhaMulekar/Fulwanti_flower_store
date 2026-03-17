@@ -15,7 +15,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen flex flex-col bg-[#050608] text-white">
+      <div style={{color:"red"}} className="min-h-screen flex flex-col bg-[#050608] text-white">
         <Navbar />
 
         <main className="flex-1 pt-24 pb-12 px-4 sm:px-8 lg:px-16">
