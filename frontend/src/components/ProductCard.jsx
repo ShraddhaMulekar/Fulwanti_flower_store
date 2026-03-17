@@ -1,15 +1,21 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
 
   const handleAddToCart = (e) => {
     e.stopPropagation();
+    if (!token) {
+      navigate("/login", { state: { from: "/products" } });
+      return;
+    }
     dispatch(addToCart(product));
+    navigate("/cart");
   };
 
   const openDetails = () => {

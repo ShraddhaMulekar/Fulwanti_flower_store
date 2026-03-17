@@ -10,6 +10,7 @@ const Navbar = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   const [searchTerm, setSearchTerm] = useState("");
+  const isLoggedIn = Boolean(token && (user?._id || user?.email));
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -79,12 +80,18 @@ const Navbar = () => {
             to="/cart"
             className="relative flex items-center text-gray-200 hover:text-orange-300 transition-colors tracking-wide"
           >
-            Cart / Order
+            Cart
             {cartItems.length > 0 && (
               <span className="ml-1 inline-flex items-center justify-center text-[10px] w-5 h-5 rounded-full bg-orange-400 text-black animate-bounce">
                 {cartItems.length}
               </span>
             )}
+          </Link>
+          <Link
+            to="/orders"
+            className="text-gray-200 hover:text-orange-300 transition-colors tracking-wide"
+          >
+            Orders
           </Link>
           <Link
             to="/ai-chat"
@@ -93,7 +100,7 @@ const Navbar = () => {
             AI Chat
           </Link>
 
-          {!token && (
+          {!isLoggedIn && (
             <>
               <Link
                 to="/login"
@@ -110,7 +117,7 @@ const Navbar = () => {
             </>
           )}
 
-          {token && (
+          {isLoggedIn && (
             <>
               {user?.role === "admin" && (
                 <Link

@@ -9,13 +9,14 @@ import RegisterPage from "./pages/register/registerPage";
 import ProductDetail from "./pages/ProductDetail";
 import AIChat from "./pages/AIChat";
 import Orders from "./pages/Orders";
+import OrderCheckout from "./pages/OrderCheckout";
 import AdminDashboard from "./pages/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <BrowserRouter>
-      <div style={{color:"red"}} className="min-h-screen flex flex-col bg-[#050608] text-white">
+      <div className="min-h-screen flex flex-col bg-[#050608] text-white">
         <Navbar />
 
         <main className="flex-1 pt-24 pb-12 px-4 sm:px-8 lg:px-16">
@@ -39,6 +40,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Cart />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/order"
+              element={
+                <ProtectedRoute>
+                  <OrderCheckout />
                 </ProtectedRoute>
               }
             />

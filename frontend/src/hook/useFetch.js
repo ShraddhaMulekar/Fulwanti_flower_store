@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { fetchAPI } from "../api/api";
 
 const useFetch = () => {
@@ -6,16 +6,19 @@ const useFetch = () => {
   const [error, setError] = useState(null);
 
   const request = async (url, method = "GET", body = null) => {
+    setLoading(true);
+    setError(null);
     try {
       const data = await fetchAPI(url, {
         method,
         body: body ? JSON.stringify(body) : null,
       });
-      setLoading(false);
       return data;
-    } catch (error) {
+    } catch (err) {
+      setError(err);
+      throw err;
+    } finally {
       setLoading(false);
-      setError(error);
     }
   };
   return { loading, error, request };

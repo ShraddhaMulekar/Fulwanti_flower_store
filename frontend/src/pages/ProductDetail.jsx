@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API_URL } from "../api/api";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/cartSlice";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -47,10 +48,14 @@ const ProductDetail = () => {
   }, [id]);
 
   const handleAddToCart = () => {
+    if (!token) {
+      navigate("/login", { state: { from: `/products/${id}` } });
+      return;
+    }
     if (!product) return;
     const count = Math.max(1, Number(qty) || 1);
     for (let i = 0; i < count; i += 1) dispatch(addToCart(product));
-    alert("Added to cart!");
+    navigate("/cart");
   };
 
   if (loading) {
