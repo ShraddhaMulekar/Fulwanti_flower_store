@@ -78,58 +78,20 @@ const ProductDetail = () => {
         ← Back
       </button>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[90px,1.2fr,1fr] gap-6">
-        {/* Left: thumbnails */}
-        <aside className="hidden lg:flex flex-col gap-3">
-          {galleryImages.map((img, idx) => (
-            <button
-              key={`${img}-${idx}`}
-              onClick={() => setActiveImageIndex(idx)}
-              className={`rounded-xl overflow-hidden border transition ${
-                idx === activeImageIndex
-                  ? "border-orange-400"
-                  : "border-white/10 hover:border-orange-400/40"
-              } bg-[#0b0d10]`}
-            >
-              <img
-                src={img}
-                alt={`${product.name} ${idx + 1}`}
-                className="w-full h-16 object-cover object-center"
-              />
-            </button>
-          ))}
-        </aside>
+      <div className="grid grid-cols-2 lg:grid-cols-[90px,1.2fr,1fr] gap-6">
 
-        {/* Center: main image */}
+        {/* left: main image */}
         <section className="bg-[#0b0d10] border border-white/10 rounded-2xl overflow-hidden relative">
-          <div className="absolute inset-0 bg-gradient-to-tr from-orange-400/10 via-transparent to-pink-500/10" />
+          <div className="absolute inset-0 bg-linear-to-tr from-orange-400/10 via-transparent to-pink-500/10" />
           <img
             src={galleryImages[activeImageIndex] || product.image}
             alt={product.name}
-            className="relative w-full h-[360px] sm:h-[460px] object-contain bg-[#0f1216]"
+            className="relative w-full h-90 sm:h-115 object-contain bg-[#0f1216]"
           />
-          <div className="absolute bottom-3 right-3 flex gap-2">
-            <button
-              onClick={() =>
-                setActiveImageIndex((p) => (p - 1 + galleryImages.length) % galleryImages.length)
-              }
-              className="w-9 h-9 rounded-full bg-black/60 border border-white/10 text-gray-200 hover:text-orange-300 hover:border-orange-400/40 transition"
-            >
-              ‹
-            </button>
-            <button
-              onClick={() =>
-                setActiveImageIndex((p) => (p + 1) % galleryImages.length)
-              }
-              className="w-9 h-9 rounded-full bg-black/60 border border-white/10 text-gray-200 hover:text-orange-300 hover:border-orange-400/40 transition"
-            >
-              ›
-            </button>
-          </div>
         </section>
 
         {/* Right: details */}
-        <section className="bg-[#0b0d10] border border-white/10 rounded-2xl p-5 sm:p-6">
+        <section className="bg-[#0b0d10] border border-white/10 rounded-2xl p-5 sm:p-6 w-full">
           <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-100">
             {product.name}
           </h1>
