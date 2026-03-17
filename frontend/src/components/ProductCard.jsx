@@ -33,7 +33,7 @@ const ProductCard = ({ product }) => {
           alt={product.name}
           className="w-40 h-50 m-auto object-cover object-center transform group-hover:scale-105 transition-transform duration-500"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-90" />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent opacity-90" />
       </div>
 
       <div className="p-4 space-y-1.5">

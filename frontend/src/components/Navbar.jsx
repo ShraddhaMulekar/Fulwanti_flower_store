@@ -35,7 +35,7 @@ const Navbar = () => {
       }}
     >
       {/* Lighter overlay so background image is visible */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/55 to-black/70 backdrop-blur-[1px]" />
+      <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/55 to-black/70 backdrop-blur-[1px]" />
       <div className="relative max-w-6xl mx-auto flex items-center justify-between px-4 py-4 gap-4 text-sm">
         {/* Brand */}
         <div

@@ -209,7 +209,7 @@ const AdminDashboard = () => {
         {products.length === 0 ? (
           <p className="text-xs text-gray-400">No products available.</p>
         ) : (
-          <div className="space-y-3 text-sm max-h-[520px] overflow-y-auto pr-1">
+          <div className="space-y-3 text-sm max-h-130 overflow-y-auto pr-1">
             {products.map((p) => (
               <div
                 key={p._id}

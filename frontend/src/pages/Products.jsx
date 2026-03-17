@@ -138,18 +138,6 @@ const Products = () => {
           </p>
         </div>
 
-        {/* Search */}
-        <div className="mb-2">
-          <p className="text-[11px] font-semibold text-gray-200 mb-1">Search</p>
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search by product / category..."
-            className="w-full rounded-xl border border-white/10 bg-[#111111] px-3 py-2 text-xs text-gray-100 placeholder:text-gray-500 outline-none focus:ring-2 focus:ring-orange-400"
-          />
-        </div>
-
         {/* Categories */}
         <Section title="Category" defaultOpen>
           <div className="space-y-2 text-xs">
