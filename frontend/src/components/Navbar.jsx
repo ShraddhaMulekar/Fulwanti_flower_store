@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-20 bg-[#050608]/90 backdrop-blur border-b border-white/10">
+    <nav className="fixed top-0 left-0 right-0 z-20 bg-black/80 backdrop-blur border-b border-orange-400/10 animate-fade-in">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-4 gap-4 text-sm">
         {/* Brand */}
         <div
@@ -33,7 +33,7 @@ const Navbar = () => {
         >
           <span className="text-2xl">🌸</span>
           <div className="leading-tight">
-            <p className="font-extrabold text-orange-300 tracking-tight text-lg">
+            <p className="font-extrabold text-orange-300 tracking-tight text-lg drop-shadow">
               Fulwanti Flowers
             </p>
             <p className="text-[10px] text-gray-300">
@@ -45,7 +45,7 @@ const Navbar = () => {
         {/* Search */}
         <form
           onSubmit={handleSearch}
-          className="hidden md:flex flex-1 max-w-md items-center bg-[#111111] rounded-full px-3 py-1 shadow-inner border border-white/10"
+          className="hidden md:flex flex-1 max-w-md items-center bg-[#0f0f0f] rounded-full px-3 py-1 shadow-inner border border-orange-400/10 hover:border-orange-400/30 transition-colors"
         >
           <input
             type="text"
@@ -56,7 +56,7 @@ const Navbar = () => {
           />
           <button
             type="submit"
-            className="ml-2 px-3 py-1 rounded-full bg-orange-400 text-black text-xs font-semibold hover:bg-orange-300 transition-transform transform hover:-translate-y-0.5"
+            className="ml-2 px-3 py-1 rounded-full bg-orange-400 text-black text-xs font-semibold hover:bg-orange-300 transition-transform transform hover:-translate-y-0.5 active:translate-y-0"
           >
             Search
           </button>
@@ -82,7 +82,7 @@ const Navbar = () => {
           >
             Cart
             {cartItems.length > 0 && (
-              <span className="ml-1 inline-flex items-center justify-center text-[10px] w-5 h-5 rounded-full bg-orange-400 text-black animate-bounce">
+              <span className="ml-1 inline-flex items-center justify-center text-[10px] w-5 h-5 rounded-full bg-orange-400 text-black animate-pulse">
                 {cartItems.length}
               </span>
             )}
@@ -104,13 +104,13 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="px-3 py-1 rounded-full border border-gray-600 text-gray-100 hover:bg-gray-800 transition"
+                className="px-3 py-1 rounded-full border border-orange-400/20 text-gray-100 hover:border-orange-400/40 hover:text-orange-300 transition-colors"
               >
                 Login
               </Link>
               <Link
                 to="/register"
-                className="px-3 py-1 rounded-full bg-orange-400 text-black hover:bg-orange-300 transition"
+                className="px-3 py-1 rounded-full bg-orange-400 text-black hover:bg-orange-300 transition-transform transform hover:-translate-y-0.5"
               >
                 Register
               </Link>
@@ -130,7 +130,7 @@ const Navbar = () => {
 
               <button
                 onClick={handleLogout}
-                className="px-3 py-1 rounded-full border border-gray-600 text-gray-100 hover:bg-gray-800 transition"
+                className="px-3 py-1 rounded-full border border-orange-400/20 text-gray-100 hover:border-orange-400/40 hover:text-orange-300 transition-colors"
               >
                 Logout
               </button>
