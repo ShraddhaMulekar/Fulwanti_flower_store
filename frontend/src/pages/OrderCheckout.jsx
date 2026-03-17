@@ -11,7 +11,7 @@ const OrderCheckout = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   const [deliveryOption, setDeliveryOption] = useState("same-day");
-  const [paymentStatus, setPaymentStatus] = useState("pending");
+  const [paymentMethod, setPaymentMethod] = useState("cod"); // cod | razorpay
   const [placing, setPlacing] = useState(false);
 
   const total = useMemo(
@@ -23,7 +23,7 @@ const OrderCheckout = () => {
     [cartItems],
   );
 
-  const placeOrder = async () => {
+  const placeOrderCOD = async () => {
     if (!cartItems.length || placing) return;
     setPlacing(true);
     try {
@@ -33,7 +33,7 @@ const OrderCheckout = () => {
           quantity: item.quantity || 1,
         })),
         totalPrice: total,
-        paymentStatus,
+        paymentStatus: "pending",
         deliveryOption,
       };
 
@@ -47,6 +47,73 @@ const OrderCheckout = () => {
     } catch (err) {
       console.log(err);
       alert("Something went wrong while placing the order");
+    } finally {
+      setPlacing(false);
+    }
+  };
+
+  const payWithRazorpay = async () => {
+    if (!cartItems.length || placing) return;
+    if (!window.Razorpay) {
+      alert("Razorpay SDK not loaded. Please refresh the page.");
+      return;
+    }
+    setPlacing(true);
+    try {
+      // 1) Create Razorpay order on backend
+      const create = await request("/payment/create-order", "POST", {
+        amount: total,
+      });
+      if (!create?.status) {
+        alert(create?.message || "Failed to start payment");
+        return;
+      }
+
+      const razorpayOrder = create.order;
+      const keyId = create.keyId;
+
+      // 2) Open Razorpay checkout
+      const options = {
+        key: keyId,
+        amount: razorpayOrder.amount,
+        currency: razorpayOrder.currency,
+        name: "Fulwanti Flower Store",
+        description: "Flower order payment",
+        order_id: razorpayOrder.id,
+        theme: { color: "#fb923c" },
+        handler: async (response) => {
+          // 3) Verify payment + create MongoDB order on backend
+          const verify = await request(
+            "/payment/verify-and-create-order",
+            "POST",
+            {
+              ...response,
+              products: cartItems.map((item) => ({
+                productId: item._id,
+                quantity: item.quantity || 1,
+              })),
+              totalPrice: total,
+              deliveryOption,
+            },
+          );
+
+          if (verify?.status) {
+            dispatch(clearCart());
+            navigate("/orders", { replace: true });
+          } else {
+            alert(verify?.message || "Payment verification failed");
+          }
+        },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.on("payment.failed", function () {
+        alert("Payment failed. Please try again.");
+      });
+      rzp.open();
+    } catch (err) {
+      console.log(err);
+      alert("Payment error. Please try again.");
     } finally {
       setPlacing(false);
     }
@@ -152,19 +219,19 @@ const OrderCheckout = () => {
 
             <div className="mt-3 rounded-xl border border-white/10 bg-[#111111] p-3">
               <p className="text-[11px] font-semibold text-gray-300 mb-2">
-                Payment status
+                Payment method
               </p>
               <div className="space-y-2 text-xs text-gray-300">
                 {[
-                  { id: "pending", label: "Pending" },
-                  { id: "paid", label: "Paid" },
+                  { id: "cod", label: "Cash on delivery (Pending)" },
+                  { id: "razorpay", label: "Pay online (Razorpay)" },
                 ].map((opt) => (
                   <label key={opt.id} className="flex items-center gap-2">
                     <input
                       type="radio"
-                      name="payment"
-                      checked={paymentStatus === opt.id}
-                      onChange={() => setPaymentStatus(opt.id)}
+                      name="paymentMethod"
+                      checked={paymentMethod === opt.id}
+                      onChange={() => setPaymentMethod(opt.id)}
                       className="accent-orange-400"
                     />
                     {opt.label}
@@ -181,11 +248,15 @@ const OrderCheckout = () => {
             </div>
 
             <button
-              onClick={placeOrder}
+              onClick={paymentMethod === "razorpay" ? payWithRazorpay : placeOrderCOD}
               disabled={placing || loading}
               className="mt-5 w-full h-11 rounded-xl bg-orange-400 text-black text-sm font-semibold hover:bg-orange-300 transition-transform transform hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {placing || loading ? "Placing order..." : "Place Order"}
+              {placing || loading
+                ? "Processing..."
+                : paymentMethod === "razorpay"
+                ? "Pay with Razorpay"
+                : "Place Order"}
             </button>
           </aside>
         </div>

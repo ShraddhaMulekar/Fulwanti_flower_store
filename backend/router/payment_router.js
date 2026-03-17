@@ -1,7 +1,8 @@
 import express from "express"
-import { paymentController } from "../controllers/payment_controller/payment_controller.js"
+import { createRazorpayOrderController, verifyAndCreateOrderController } from "../controllers/payment_controller/payment_controller.js"
 import { protect } from "../middleware/authMiddleware.js"
 
 export const paymentRouter = express.Router()
 
-paymentRouter.post("/create", protect, paymentController)
+paymentRouter.post("/create-order", protect, createRazorpayOrderController)
+paymentRouter.post("/verify-and-create-order", protect, verifyAndCreateOrderController)

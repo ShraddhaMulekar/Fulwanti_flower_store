@@ -25,6 +25,12 @@ const OrderSchema = new mongoose.Schema(
       default: "pending",
     },
 
+    razorpay: {
+      orderId: String,
+      paymentId: String,
+      signature: String,
+    },
+
     deliveryOption: {
       type: String,
       enum: ["same-day", "next-day", "pickup"],
