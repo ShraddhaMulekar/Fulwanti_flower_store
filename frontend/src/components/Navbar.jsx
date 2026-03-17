@@ -17,6 +17,7 @@ const Navbar = () => {
     e.preventDefault();
     if (!searchTerm.trim()) return;
     navigate(`/products?search=${encodeURIComponent(searchTerm.trim())}`);
+    setSearchTerm("");
   };
 
   const handleLogout = () => {
@@ -55,7 +56,7 @@ const Navbar = () => {
         {/* Search */}
         <form
           onSubmit={handleSearch}
-          className="hidden md:flex flex-1 max-w-md items-center bg-[#0f0f0f] rounded-full px-3 py-1 shadow-inner border border-orange-400/10 hover:border-orange-400/30 transition-colors"
+          className="flex flex-1 max-w-md items-center bg-[#0f0f0f] rounded-full px-3 py-1 shadow-inner border border-orange-400/10 hover:border-orange-400/30 transition-colors"
         >
           <input
             type="text"
