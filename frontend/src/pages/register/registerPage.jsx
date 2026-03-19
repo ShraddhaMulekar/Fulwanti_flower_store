@@ -1,10 +1,11 @@
 import React from "react";
 import useForm from "../../hook/useForm";
 import useRegister from "./useRegister";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
 
+  const navigate = useNavigate()
   const { values, handleChange } = useForm({
     name: "",
     email: "",
@@ -18,6 +19,7 @@ const RegisterPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     registerUser(values);
+    navigate(to="/login")
   };
 
   return (

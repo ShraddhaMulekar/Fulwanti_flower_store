@@ -1,10 +1,10 @@
 import React from "react";
 import useForm from "../../hook/useForm";
 import loginLogic from "./loginLogic";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-
+  const navigate = useNavigate()
   const { values, handleChange } = useForm({
     email: "",
     password: "",
@@ -15,6 +15,7 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     loginUser(values);
+    navigate(to="/products")
   };
 
   return (
@@ -29,8 +30,12 @@ const LoginPage = () => {
             Fulwanti flower store
           </p>
           <h1 className="relative mt-4 leading-none">
-            <span className="block text-4xl font-light text-gray-200">ONLY</span>
-            <span className="block text-4xl font-light text-gray-200">FRESH</span>
+            <span className="block text-4xl font-light text-gray-200">
+              ONLY
+            </span>
+            <span className="block text-4xl font-light text-gray-200">
+              FRESH
+            </span>
             <span className="block text-5xl sm:text-6xl font-extrabold text-orange-400 mt-2">
               BLOOMS
             </span>

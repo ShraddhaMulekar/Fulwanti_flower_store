@@ -30,7 +30,7 @@ const loginLogic = () => {
         } else if (data?.user?.role === "admin") {
           navigate("/admin", { replace: true });
         } else {
-          navigate("/", { replace: true });
+          navigate("/products", { replace: true });
         }
       } else {
         alert(data?.message || "Login failed");

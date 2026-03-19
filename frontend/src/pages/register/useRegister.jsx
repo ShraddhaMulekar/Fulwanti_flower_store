@@ -1,8 +1,10 @@
 import useFetch from "../../hook/useFetch";
+import { useNavigate } from "react-router-dom";
 
 const useRegister = () => {
 
   const { request } = useFetch();
+  const navigate = useNavigate();
 
   const registerUser = async (values) => {
 
@@ -12,6 +14,7 @@ const useRegister = () => {
 
       if (data?.status) {
         alert("Registration Successful");
+        navigate("/login");
       } else {
         alert(data?.message);
       }

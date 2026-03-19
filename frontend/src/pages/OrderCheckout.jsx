@@ -224,7 +224,7 @@ const OrderCheckout = () => {
               <div className="space-y-2 text-xs text-gray-300">
                 {[
                   { id: "cod", label: "Cash on delivery (Pending)" },
-                  { id: "razorpay", label: "Pay online (Razorpay)" },
+                  // { id: "razorpay", label: "Pay online (Razorpay)" },
                 ].map((opt) => (
                   <label key={opt.id} className="flex items-center gap-2">
                     <input
