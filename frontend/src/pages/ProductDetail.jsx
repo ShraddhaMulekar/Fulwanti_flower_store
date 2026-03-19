@@ -83,7 +83,7 @@ const ProductDetail = () => {
         ← Back
       </button>
 
-      <div className="grid grid-cols-2 lg:grid-cols-[90px,1.2fr,1fr] gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
         {/* left: main image */}
         <section className="bg-[#0b0d10] border border-white/10 rounded-2xl overflow-hidden relative">

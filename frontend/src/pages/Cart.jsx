@@ -81,9 +81,10 @@ const Cart = () => {
               {cartItems.map((item) => (
                 <div
                   key={item._id}
-                  className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-[#0f1216] p-3 hover:border-orange-400/30 transition"
+                  className="group flex flex-col sm:flex-row sm:items-center gap-3 rounded-2xl border border-white/10 bg-[#0f1216] p-3 hover:border-orange-400/30 transition"
                 >
-                  <div className="w-16 h-16 rounded-xl overflow-hidden bg-[#111111] border border-white/10">
+                  <div className="flex items-center gap-3 w-full sm:w-auto">
+                    <div className="w-16 h-16 rounded-xl overflow-hidden bg-[#111111] border border-white/10 shrink-0">
                     <img
                       src={item.image}
                       alt={item.name}
@@ -100,8 +101,9 @@ const Cart = () => {
                       <span className="capitalize">{item.category}</span>
                     </p>
                   </div>
+                  </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto mt-2 sm:mt-0">
                     <input
                       type="number"
                       min="1"

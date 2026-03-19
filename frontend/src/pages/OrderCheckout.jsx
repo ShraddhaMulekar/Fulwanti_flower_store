@@ -121,7 +121,7 @@ const OrderCheckout = () => {
 
   return (
     <div className="max-w-6xl mx-auto animate-fade-up">
-      <div className="flex items-center justify-between gap-3 mb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
         <div>
           <p className="text-[10px] tracking-[0.25em] uppercase text-gray-400">
             only fresh blooms

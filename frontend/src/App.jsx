@@ -12,6 +12,7 @@ import Orders from "./pages/Orders";
 import OrderCheckout from "./pages/OrderCheckout";
 import AdminDashboard from "./pages/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -69,6 +70,8 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            {/* Catch all 404 Route */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
 

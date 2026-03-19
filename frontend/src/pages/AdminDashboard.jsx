@@ -111,7 +111,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-[360px,1fr] gap-6 animate-fade-up">
+    <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[360px,1fr] gap-6 animate-fade-up">
       {/* Product form */}
       <aside className="rounded-2xl border border-orange-400/10 bg-[#0b0d10] p-4 sm:p-6 h-fit sticky top-24">
         <p className="text-[10px] tracking-[0.25em] uppercase text-gray-400">
@@ -195,7 +195,7 @@ const AdminDashboard = () => {
 
       {/* Product list */}
       <section className="rounded-2xl border border-orange-400/10 bg-[#0b0d10] p-4 sm:p-6">
-        <div className="flex items-end justify-between gap-3 mb-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-4">
           <div>
             <p className="text-[10px] tracking-[0.25em] uppercase text-gray-400">
               manage inventory
@@ -213,20 +213,23 @@ const AdminDashboard = () => {
             {products.map((p) => (
               <div
                 key={p._id}
-                className="group flex items-center gap-3 border border-white/10 rounded-2xl p-3 bg-[#0f1216] hover:border-orange-400/30 transition"
+                className="group flex flex-col sm:flex-row sm:items-center gap-3 border border-white/10 rounded-2xl p-3 bg-[#0f1216] hover:border-orange-400/30 transition"
               >
-                <img
-                  src={p.image}
-                  alt={p.name}
-                  className="w-12 h-12 rounded-xl object-cover"
-                />
-                <div className="flex-1">
-                  <p className="font-semibold text-gray-100">{p.name}</p>
-                  <p className="text-[11px] text-gray-400">
-                    ₹{p.price} • stock {p.stock} •{" "}
-                    <span className="capitalize">{p.category}</span>
-                  </p>
+                <div className="flex items-center gap-3 w-full sm:w-auto">
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    className="w-12 h-12 rounded-xl object-cover shrink-0"
+                  />
+                  <div className="flex-1">
+                    <p className="font-semibold text-gray-100">{p.name}</p>
+                    <p className="text-[11px] text-gray-400">
+                      ₹{p.price} • stock {p.stock} •{" "}
+                      <span className="capitalize">{p.category}</span>
+                    </p>
+                  </div>
                 </div>
+                <div className="flex items-center gap-2 w-full sm:w-auto justify-end mt-2 sm:mt-0">
                 <button
                   onClick={() => startEdit(p)}
                   className="text-xs px-3 py-2 rounded-xl bg-[#111111] border border-white/10 text-gray-200 hover:border-orange-400/30 hover:text-orange-300 transition"
@@ -239,6 +242,7 @@ const AdminDashboard = () => {
                 >
                   Delete
                 </button>
+                </div>
               </div>
             ))}
           </div>

@@ -15,12 +15,12 @@ const Footer = () => {
       }}
     >
       {/* Lighter overlay so background image is visible */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/55 to-black/75 backdrop-blur-[1px]" />
+      <div className="absolute inset-0 bg-linear-to-b from-black/65 via-black/55 to-black/75 backdrop-blur-[1px]" />
       <div className="relative">
         <div className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm animate-fade-up">
           <div>
           <div className="flex items-center gap-2">
-            <span className="text-xl">🌸</span>
+            <img src="logo.png" alt="logo" className="w-10 md:w-[15%]" />
             <h3 className="font-extrabold text-lg text-orange-300">
               Fulwanti Flower Store
             </h3>

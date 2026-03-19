@@ -108,9 +108,9 @@ const Products = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto flex gap-6 animate-fade-up">
+    <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 animate-fade-up">
       {/* Left: Filter panel */}
-      <aside className="bg-[#0b0d10] rounded-2xl border border-white/10 p-4 h-fit sticky top-24 w-[30%]">
+      <aside className="bg-[#0b0d10] rounded-2xl border border-white/10 p-4 h-fit md:sticky top-24 w-full md:w-[30%] lg:w-[25%]">
         {/* Sort on top (like screenshot left header) */}
         <div className="mb-4">
           <label className="text-[11px] font-semibold text-gray-200 mb-1 block">
@@ -234,7 +234,7 @@ const Products = () => {
       </aside>
 
       {/* Right: Products area */}
-      <section className="bg-[#0b0d10] rounded-2xl border border-white/10 p-4 sm:p-6 w-full">
+      <section className="bg-[#0b0d10] rounded-2xl border border-white/10 p-4 sm:p-6 w-full md:w-[70%] lg:w-[75%]">
         <div className="flex items-center justify-between flex-wrap gap-3 mb-5">
           <div>
             <p className="text-[10px] tracking-[0.25em] uppercase text-gray-400">
@@ -260,7 +260,7 @@ const Products = () => {
             No products match your filters.
           </p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5 gap-3 w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5 gap-3 w-full">
             {filteredProducts.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}
